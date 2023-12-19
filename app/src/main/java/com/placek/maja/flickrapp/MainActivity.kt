@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
@@ -32,7 +32,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FlickrAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -45,42 +44,24 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    FlickrAppTheme {
-//        Greeting("Android")
-//    }
-//}
-//
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun PhotoItem(photo: Photo) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
-        // Display the image using Coil
         Image(
             painter = rememberImagePainter(data = photo.url),
-            contentDescription = null, // Content description is not applicable for decorative images
+            contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(dimensionResource(id = R.dimen.image_height))
                 .clip(MaterialTheme.shapes.medium),
             contentScale = ContentScale.Crop
         )
 
-        // Display the photo title
         Text(
             text = photo.title,
             modifier = Modifier
