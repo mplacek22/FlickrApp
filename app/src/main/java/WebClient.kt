@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit
 private const val BASE_URL = "https://api.flickr.com/services/rest/"
 private const val CONNECTION_TIMEOUT_MS: Long = 10
 private const val FLICKR_API_KEY = "b0e7c6a2e84827018bffe7af67ffa62d"
+private const val PHOTO_TEXT = "doctor"
 
 object WebClient {
     val client: ApiService by lazy {
@@ -35,7 +36,7 @@ object WebClient {
 }
 
 interface ApiService {
-    @GET("?method=flickr.photos.search&format=json&nojsoncallback=1&text=dogs&api_key=$FLICKR_API_KEY")
+    @GET("?method=flickr.photos.search&format=json&nojsoncallback=1&text=$PHOTO_TEXT&api_key=$FLICKR_API_KEY")
     suspend fun fetchImages(): PhotosSearchResponse
 }
 
